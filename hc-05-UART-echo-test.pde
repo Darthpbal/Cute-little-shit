@@ -1,3 +1,5 @@
+//Quirk about needing to press the button for full functionality is notated here - http://electronics.stackexchange.com/questions/101572/hc-05-bluetooth-module-not-responding-to-certain-commands
+
 // Basic bluetooth test sketch. HC-0x_FC-114_01_9600
 //  Uses hardware serial to talk to the host computer and software serial for communication with the bluetooth module
 //
@@ -18,7 +20,7 @@ SoftwareSerial BTSerial(2, 3); // RX | TX
 
 char c = ' ';
 boolean NL = true;
-
+long btSpeed = 38400;   //for some reason serial print in the setup reports a negative value if this is an int
 void setup() 
 {
       Serial.begin(9600);
@@ -28,9 +30,9 @@ void setup()
       Serial.println("");
       
       // FC-114 default baud rate is 9600
-      BTSerial.begin(38400);  
-      Serial.println("BTserial started at 38400");
-      Serial.println("");
+      BTSerial.begin(btSpeed);  
+      Serial.println("BTserial started at );
+      Serial.println(btSpeed);
       
 }
 
