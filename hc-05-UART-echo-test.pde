@@ -1,15 +1,19 @@
 //Quirk about needing to press the button for full functionality is notated here - http://electronics.stackexchange.com/questions/101572/hc-05-bluetooth-module-not-responding-to-certain-commands
 
+//wiki page for AT commands - http://wiki.iteadstudio.com/Serial_Port_Bluetooth_Module_(Master/Slave)_:_HC-05
+
+//source link for where this code was used - http://www.martyncurrey.com/hc-05-fc-114-and-hc-06-fc-114-part-2-basic-at-commands/
+
 // Basic bluetooth test sketch. HC-0x_FC-114_01_9600
 //  Uses hardware serial to talk to the host computer and software serial for communication with the bluetooth module
 //
 //  Pins
-//  BT VCC to Arduino 5V out. 
+//  BT VCC to Arduino 5V out.
 //  BT GND to GND
 //  Arduino D3 to BT RX through a voltage divider
 //  Arduino D2 BT TX (no need voltage divider)
 //
-//  When a command is entered in the serial monitor on the computer 
+//  When a command is entered in the serial monitor on the computer
 //  the Arduino will relay it to the bluetooth module and display the result.
 //
 // The HC-0x FC-114 modules require CR and NL
@@ -21,19 +25,19 @@ SoftwareSerial BTSerial(2, 3); // RX | TX
 char c = ' ';
 boolean NL = true;
 long btSpeed = 38400;   //for some reason serial print in the setup reports a negative value if this is an int
-void setup() 
+void setup()
 {
       Serial.begin(9600);
       Serial.println("Sketch HC-0x_FC-114_01_9600");
       Serial.println("Arduino with HC-0x FC-114 is ready");
       Serial.println("Make sure Both NL & CR are set");
       Serial.println("");
-      
+
       // FC-114 default baud rate is 9600
-      BTSerial.begin(btSpeed);  
+      BTSerial.begin(btSpeed);
       Serial.println("BTserial started at );
       Serial.println(btSpeed);
-      
+
 }
 
 void loop()
@@ -45,15 +49,15 @@ void loop()
         c = BTSerial.read();
         Serial.write(c);
     }
-    
-      
-  
+
+
+
     // Read from the Serial Monitor and send to the Bluetooth module
     if (Serial.available())
     {
         c = Serial.read();
-        BTSerial.write(c);   
-        
+        BTSerial.write(c);
+
         // Echo the user input to the main window. The ">" character indicates the user entered text.
         if (NL) { Serial.print(">");  NL = false; }
         Serial.write(c);
@@ -63,8 +67,8 @@ void loop()
 }
 
 /*
-Another supposed way to just setup a debug operation just echoing 
-the UART serial line from the desktop to the bluetooth module, 
+Another supposed way to just setup a debug operation just echoing
+the UART serial line from the desktop to the bluetooth module,
 and echoing the BT board back to the desktop
 
 SoftwareSerial BluetoothSerial(10, 11);
