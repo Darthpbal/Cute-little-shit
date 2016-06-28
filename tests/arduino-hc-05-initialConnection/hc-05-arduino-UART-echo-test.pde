@@ -35,7 +35,7 @@ void setup()
 
       // FC-114 default baud rate is 9600
       BTSerial.begin(btSpeed);
-      Serial.println("BTserial started at );
+      Serial.println("BTserial started at ");
       Serial.println(btSpeed);
 
 }
