@@ -55,6 +55,7 @@ void loop()
   // parse incoming command start flag
   get_char = Serial.read();
   if (get_char != START_CMD_CHAR) return; // if no command start flag, return to loop().
+  Serial.println("start char seen");
 
   // parse incoming command type
   ard_command = Serial.parseInt(); // read the command
@@ -62,6 +63,7 @@ void loop()
   // parse incoming pin# and value
   pin_num = Serial.parseInt(); // read the pin
   pin_value = Serial.parseInt();  // read the value
+  Serial.println(START_CMD_CHAR + ard_command + DIV_CMD_CHAR + pin_num + DIV_CMD_CHAR + pin_value + END_CMD_CHAR + '\n');
 
   // 1) GET TEXT COMMAND FROM ARDUDROID
   if (ard_command == CMD_TEXT){
