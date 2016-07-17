@@ -12,17 +12,23 @@ https://play.google.com/store/apps/details?id=com.techbitar.android.Andruino
  LICENSE: Public domain
 */
 
+//word delim, start and end char definitions
 #define START_CMD_CHAR '*'
 #define END_CMD_CHAR '#'
 #define DIV_CMD_CHAR '|'
+
+//command type
 #define CMD_DIGITALWRITE 10
 #define CMD_ANALOGWRITE 11
 #define CMD_TEXT 12
 #define CMD_READ_ARDUDROID 13
+
 #define MAX_COMMAND 20  // max command number code. used for error checking.
 #define MIN_COMMAND 10  // minimum command number code. used for error checking.
 #define IN_STRING_LENGHT 40
 #define MAX_ANALOGWRITE 255
+
+//digital write level
 #define PIN_HIGH 3
 #define PIN_LOW 2
 
