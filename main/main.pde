@@ -18,6 +18,23 @@ val for a second motor. would i compromise stability?
 what if i encode two value into one and the algorithm 
 is only enaged in the motor driving block?
 my goal is to transmit as little data as possible
+
+what if the transmission is #motorDrive|powLev|diff#
+where motordrive is the motor driving command. powLev 
+is the general power level. so 255 would be full 
+forward and -255 is full reverse. then diff would be a
+differential to apply. so spinning right would be 
+255|255#. spinning left would be 255|-255# assuming 
+that the  parseInt function can handle the negative 
+sign. if not, we can just do 0 - 255 and see how that 
+resolution works. 
+
+this is nice because its the same amount of data 
+transmitted, but assumes the motor pins stay the same, 
+or at least dont need to be addressed directly. Instead,
+the system just takes a value and a difference to apply,
+which makes the data transmitted cover two aanalog drive 
+values.
 */
 
 #define START_CMD_CHAR '*'
@@ -80,9 +97,21 @@ void loop() {
   }
 
   // SET analogWrite DATA FROM bluetooth
-  if (ard_command == CMD_ANALOGWRITE) {
-    analogWrite(  pin_num, pin_value );
-    // add your code here
+  //if (ard_command == CMD_ANALOGWRITE) {
+  //  analogWrite(  pin_num, pin_value );
+  //  // add your code here
+  //  return;  // Done. return to loop();
+  //}
+  
+  // handle bluetooth motor drive command.
+  //motor drive range 0 - 255
+  //motor diff range -255 - 255
+  if (ard_command == CMD_MOTOR) {
+    driveMotor(RIGHT,val);
+    driveMotor(LEFT,val - diff);//correct 
+    	//this. this will end up outside of the 
+    	//pwm resolution range
+    
     return;  // Done. return to loop();
   }
 
