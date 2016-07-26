@@ -2,12 +2,29 @@
 ----------------------------------------
 Generally, this program
 ----------------------------------------
+i'd want to send data all the time to the 
+arduino for running like constantly changing
+the analog stivk value when it also always 
+has an x and y position or at the neutral position
+
+can i do this better by adding a second argument?
+would it benefit or make things complicated for low
+reward?
+original format:
+	*int|int|int#
+	*cmd|pin|val#
+if i simply add two more arguments for pin num and 
+val for a second motor. would i compromise stability?
+what if i encode two value into one and the algorithm 
+is only enaged in the motor driving block?
+my goal is to transmit as little data as possible
 */
 
 #define START_CMD_CHAR '*'
 #define END_CMD_CHAR '#'
 #define DIV_CMD_CHAR '|'
 
+#define CMD_MOTOR 9
 #define CMD_DIGITALWRITE 10
 #define CMD_ANALOGWRITE 11
 #define CMD_WAGTAIL 12
@@ -17,9 +34,7 @@ Generally, this program
 #define MAX_ANALOGWRITE 255
 
 #define PIN_HIGH 3
-
 #define PIN_LOW 2
-
 
 
 void setup() {
@@ -29,6 +44,7 @@ void setup() {
 }
 
 void loop() {
+  //read until the serial port is empty
   Serial.flush();
   int ard_command = 0;
   int pin_num = 0;
@@ -46,6 +62,7 @@ void loop() {
   ard_command = Serial.parseInt();
   pin_num = Serial.parseInt();
   pin_value= Serial.parseInt();
+  Serial.println("command received! what was seen...");
   Serial.println(START_CMD_CHAR + ard_command + DIV_CMD_CHAR + pin_num + DIV_CMD_CHAR + pin_value + END_CMD_CHAR + \n);
 
   //-------command seen and parsed, handle command routines below-------
