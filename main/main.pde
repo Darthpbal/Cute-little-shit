@@ -115,9 +115,30 @@ void loop() {
     return;  // Done. return to loop();
   }
 
-  if(ard_command == CMD_HONK){}
-  if(ard_command == CMD_HONKTONE){}
-  if(ard_command == CMD_WAGTAIL){}
+  //i imagine this to be something like 
+  //a continuous honk while the button 
+  //on the phone is pressed
+  //i think id like some good tone control 
+  //using a slider on the phone, so ill 
+  //need to encode on and off in the pinval. 
+  //i think just 0 would be horn off, and any
+  //truthy value would be on and that frequency.
+  if(ard_command == CMD_HONK){
+    Serial.println("entered ");
+  }
+  
+  //this honk should be a preset series 
+  //of tones to make a short song
+  if(ard_command == CMD_HONKTONE){
+    Serial.println("entered ");
+  }
+  
+  //this will execute a series of motor 
+  //actions to jostle the robot back and 
+  //fourth imitating a tail wag
+  if(ard_command == CMD_WAGTAIL){
+    Serial.println("entered ");
+  }
 }
 
 
